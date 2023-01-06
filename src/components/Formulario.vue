@@ -1,27 +1,30 @@
 <template>
     <div class="box">
         <div class="columns">
-            <div class="columns is-8" role="form" aria-label="Formulário para criação de uma nova tarefa">
+            <div class="column is-8" role="form" aria-label="Formulário para criação de uma nova tarefa">
                 <input type="text" class="input" placeholder="Qual tarefa deseja iniciar?">
             </div>
-            <div class="columns">
-                <section>
-                    <strong>
-                        00:00:00
-                    </strong>
-                    <button class="button">
+            <div class="column">
+                <div class="is-flex is-align-items-center is-justify-content-space-between">
+                    <section>
+                        <strong>
+                            {{ TempoDecorrido }}
+                        </strong>
+                    </section>
+                    <button class="button" @click="iniciar">
                         <span class="icon">
                             <i class="fas fa-play"></i>
                         </span>
                         <span>play</span>
                     </button>
-                    <button class="button">
+                    <button class="button" @click="finalizar">
                         <span class="icon">
                             <i class="fas fa-stop"></i>
                         </span>
                         <span>stop</span>
                     </button>
-                </section>
+                    
+                </div>
             </div>
         </div>
     </div>
@@ -32,7 +35,31 @@
     import { defineComponent } from 'vue';
 
     export default defineComponent({
-        name: 'MeuFormulario'
+        name: 'MeuFormulario',
+        data () {
+            return{
+                TempoEmSegundos: 0
+            }
+        },
+        computed:{
+            TempoDecorrido() : string { 
+                return new Date(this.TempoEmSegundos * 1000).toISOString().substr(11,8)
+            }
+        }
+        ,
+        methods:
+        {
+            iniciar () {
+                setInterval(() => {
+                    this.TempoEmSegundos += 1
+                    console.log("incrementando o contador")
+                }, 1000) 
+                console.log("iniciando")
+            },
+            finalizar () {
+                console.log("finalizando")
+            }
+        }
     })
 
 </script>
