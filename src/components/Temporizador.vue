@@ -7,13 +7,13 @@
             
             <Cronometro :TempoEmSegundos="TempoEmSegundos"/>
             
-            <button class="button" @click="iniciar">
+            <button class="button" @click="iniciar" :disabled="cronometroRodando">
                 <span class="icon">
                     <i class="fas fa-play"></i>
                 </span>
                 <span>play</span>
             </button>
-            <button class="button" @click="finalizar">
+            <button class="button" @click="finalizar" :disabled="!cronometroRodando">
                 <span class="icon">
                     <i class="fas fa-stop"></i>
                 </span>
@@ -30,14 +30,15 @@
     import Cronometro from './Cronometro.vue';
 
     export default defineComponent({
-    	name: "MeuFormulario",
+        name: "MeuFormulario",
         components:{
             Cronometro
         },
         data() {
             return {
                 TempoEmSegundos: 0,
-                cronometro: 0
+                cronometro: 0,
+                cronometroRodando: false
             };
         },
         methods: {
@@ -46,10 +47,14 @@
                     this.TempoEmSegundos += 1;
                     console.log("incrementando o contador");
                 }, 1000);
+
+                this.cronometroRodando = true;
             },
             finalizar() {
                 clearInterval(this.cronometro);
+                this.cronometroRodando = false
             }
         }
     })
+
 </script>
