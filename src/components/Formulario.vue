@@ -1,29 +1,7 @@
 <template>
     <div class="box">
         <div class="columns">
-            <div class="column is-8" role="form" aria-label="Formulário para criação de uma nova tarefa">
-                <input type="text" class="input" placeholder="Qual tarefa deseja iniciar?">
-            </div>
-            <div class="column">
-                <div class="is-flex is-align-items-center is-justify-content-space-between">
-                    
-                    <Cronometro :TempoEmSegundos="TempoEmSegundos"/>
-                    
-                    <button class="button" @click="iniciar">
-                        <span class="icon">
-                            <i class="fas fa-play"></i>
-                        </span>
-                        <span>play</span>
-                    </button>
-                    <button class="button" @click="finalizar">
-                        <span class="icon">
-                            <i class="fas fa-stop"></i>
-                        </span>
-                        <span>stop</span>
-                    </button>
-                    
-                </div>
-            </div>
+            <Temporizador/>
         </div>
     </div>
 </template>
@@ -31,31 +9,14 @@
 <script lang="ts">
 
     import { defineComponent } from 'vue';
-    import Cronometro from './Cronometro.vue';
+    import Temporizador from './Temporizador.vue';
 
     export default defineComponent({
-    name: "MeuFormulario",
-    components:{
-        Cronometro
-    },
-    data() {
-        return {
-            TempoEmSegundos: 0,
-            cronometro: 0
-        };
-    },
-    methods: {
-        iniciar() {
-            this.cronometro = setInterval(() => {
-                this.TempoEmSegundos += 1;
-                console.log("incrementando o contador");
-            }, 1000);
+        name: "MeuFormulario",
+        components:{
+            Temporizador
         },
-        finalizar() {
-            clearInterval(this.cronometro);
-        }
-    }
-})
+    })
 
 </script>
 

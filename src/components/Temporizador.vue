@@ -30,7 +30,7 @@
     import Cronometro from './Cronometro.vue';
 
     export default defineComponent({
-        name: "MeuFormulario",
+    	name: "MeuFormulario",
         components:{
             Cronometro
         },
@@ -52,5 +52,4 @@
             }
         }
     })
-
 </script>
