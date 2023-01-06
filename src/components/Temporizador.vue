@@ -1,7 +1,4 @@
 <template>
-    <div class="column is-8" role="form" aria-label="Formulário para criação de uma nova tarefa">
-        <input type="text" class="input" placeholder="Qual tarefa deseja iniciar?">
-    </div>
     <div class="column">
         <div class="is-flex is-align-items-center is-justify-content-space-between">
             
@@ -31,6 +28,7 @@
 
     export default defineComponent({
         name: "MeuFormulario",
+        emits:['aoTemporizadorFinalizado'],
         components:{
             Cronometro
         },
@@ -45,14 +43,15 @@
             iniciar() {
                 this.cronometro = setInterval(() => {
                     this.TempoEmSegundos += 1;
-                    console.log("incrementando o contador");
                 }, 1000);
 
                 this.cronometroRodando = true;
             },
             finalizar() {
                 clearInterval(this.cronometro);
-                this.cronometroRodando = false
+                this.cronometroRodando = false;
+                this.$emit('aoTemporizadorFinalizado', this.TempoEmSegundos);
+                this.TempoEmSegundos = 0;
             }
         }
     })
